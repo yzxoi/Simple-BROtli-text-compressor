@@ -12,6 +12,12 @@ Simple-BROtli-text-compressor is a lightweight C++ implementation of a Brotli-in
 
 在测试实例 `ser.log` 中，压缩率达 $4.12\%$，压缩耗时 136 ms，解压缩耗时 33 ms。
 
+| File       | Original Size (bytes) | Compressed Size (bytes) | Compression Ratio | Time      |
+|------------|----------------------:|-------------------------:|-------------------:|-----------|
+| enwik9     | 1,000,000,000         | 353,363,277              | 35.34%             | 48,192 ms |
+| bible.txt  | 4,047,392             | 1,350,855                | 33.38%             | 179 ms    |
+| ser.log    | 10,314,726            | 424,563                  | **4.12%**          | 117 ms    |
+
 ## Quick Start
 
 ### 1. Compile 
