@@ -20,12 +20,20 @@ We recommend you to use -O2 command to get better performance, although we still
 g++ sbro.cpp -o sbro -O2
 ```
 
+For users using Visual Studio with msvc compiler, please select Release x64 mode and use -O2 command for better performance.
+
 ### 2. Run
 ```shell
 # Compress
 ./sbro ser.log ser.log.sbro zip
 # Decompress
 ./sbro ser.log.sbro recover.log unzip
+
+For Visual Studio Users:
+# Compress
+.\Simple-BROtli-text-compressor.exe ..\..\..\ser.log ..\..\..\ser.log.sbro zip
+# Decompress
+.\Simple-BROtli-text-compressor.exe ..\..\..\ser.log.sbro ..\..\..\recover.log unzip
 ```
 
 The program will output the time and compression ratio automatically.

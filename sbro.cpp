@@ -188,7 +188,16 @@ struct Huffman {
 
 // ========== Bucket coding ==========
 struct BucketCoder {
-    static inline int ilog2_u32(uint32_t v){ return 31 - __builtin_clz(v); }
+    static inline int ilog2_u32(uint32_t v){
+#if defined(_MSC_VER)
+        #include <intrin.h>
+        unsigned long idx;
+        _BitScanReverse(&idx, v);
+        return (int)idx;
+#else
+        return 31 - __builtin_clz(v);
+#endif
+    }
     struct Enc { uint32_t sym; int exBits; uint32_t exVal; };
     static inline Enc encode(uint32_t value){
         if (value==0) return {0,0,0};
@@ -588,8 +597,8 @@ static void writeAll(const std::string& path, const std::vector<uint8_t>& data){
 int main(int argc, char** argv){
     if (argc!=4){
         std::cerr << "Usage:\n"
-                  << "  " << argv[0] << "<input> <output> zip\n"
-                  << "  " << argv[0] << "<input> <output> unzip\n"
+                  << "  " << argv[0] << " <input> <output> zip\n"
+                  << "  " << argv[0] << " <input> <output> unzip\n"
 				  << "Example:\n"
 				  << "  " << argv[0] << " ser.log ser.log.sbro zip\n"
 				  << "  " << argv[0] << " ser.log.sbro ser_rec.log unzip\n";
